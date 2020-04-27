@@ -1,25 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { CountProvider } from './context';
+import Four04 from './screens/404';
+import CounterView from './screens/CounterView';
+import Welcome from './screens/Welcome';
+import AppHeader from './components/AppHeader';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CountProvider>
+      <AppHeader />
+      <Router>
+        <Switch>
+          <Route exact path="/" component={CounterView} />
+          <Route exact path="/welcome" component={Welcome} />
+          <Route path='*' component={Four04} />
+        </Switch>
+      </Router>
+    </CountProvider>
   );
 }
 
